@@ -16,15 +16,14 @@ function getTransitionMatrices(name,data_dir){
 	
 
 	#initialize
-	i = 0
-	F = Matrix::Matrix(0, nrow =length(E2I), ncol = nrow(T2I), sparse = TRUE)
-	W = Matrix::Matrix(0, nrow =nrow(T2I), ncol = length(E2I), sparse = TRUE)
-	#?f = defaultdict(int)
-	#?w = defaultdict(int)
+	# F = Matrix::Matrix(0, nrow =length(E2I), ncol = nrow(T2I), sparse = TRUE)
+	# W = Matrix::Matrix(0, nrow =nrow(T2I), ncol = length(E2I), sparse = TRUE)
+	F = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(length(E2I), nrow(T2I)))
+	W = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(T2I), length(E2I)))
 	print("CONSTRUCTING DICTIONARY OF KEYS")
 	
 	# k = 0
-	print("\CALCULATING MATRIX W & F...")
+	print("CALCULATING MATRIX W & F...")
 	
 	for(i in 1:nrow(T2I)){#may be done with lapply
 		for (e in T2I[i,]){		
