@@ -1,5 +1,5 @@
 #17/10/2017
-function hare(name,data_dir, epsilon=1e-3, damping, maxIterations=1000,saveresults=TRUE, printerror=FALSE, printruntimes=FALSE){
+ hare <= function(name,data_dir, epsilon=1e-3, damping, maxIterations=1000,saveresults=TRUE, printerror=FALSE, printruntimes=FALSE){
 	
 	if (substring(name,nchar(name)-4)==".ttl")  name = substring(name,1,nchar(name)-4)
 	if (substring(name,nchar(name)-3)==".nt")  name = substring(name,1,nchar(name)-3)
