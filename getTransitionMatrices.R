@@ -1,14 +1,14 @@
 #16/10/2017
 # Calculate W:the transition matrix from triples to entities. 
-#       and F:the matrix of which the entries are the transition probabilities
-#             from entities to triples,
+	#       and F:the matrix of which the entries are the transition probabilities
+	#             from entities to triples,
 
- getTransitionMatrices <-function(name,data_dir){
+ getTransitionMatrices <-function(name,loadpath,savepath){
 	##Load data
 	if (substring(name,nchar(name)-3)==".xml")  name = substring(name,1,nchar(name)-4)
 	if (substring(name,nchar(name)-2)==".nt")  name = substring(name,1,nchar(name)-3)
-	loadpath = paste(data_dir , "Matrices\\",sep="")
-	savepath = paste(data_dir , "Matrices\\",sep="")
+	# loadpath = paste(data_dir , "Matrices\\",sep="")
+	# savepath = paste(data_dir , "Matrices\\",sep="")
 	
 	load(paste(loadpath , "e2i_" , name , ".RData",sep="")) # set of Entities E2I
 	load(paste(loadpath , "t2i_" , name , ".RData",sep="")) # set of Triples  T2I

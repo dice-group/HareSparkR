@@ -9,7 +9,7 @@
 #	List of Triples : T2I dict:key t[s,p,o],serial
 
 # This function is inspired by function parseRDF.py in HARE project
- parseRDF <- function(name,data_dir){
+ parseRDF <- function(name,loadpath,savepath){
 # Parameters:
 #   name: file name with ext .nt or .ttl
 
@@ -20,8 +20,8 @@
 # saving results
 	if (substring(name,nchar(name)-3)==".xml")  name = substring(name,1,nchar(name)-4)
 	if (substring(name,nchar(name)-2)==".nt")  name = substring(name,1,nchar(name)-3)
-	loadpath = paste(data_dir , "KnowledgeBases\\",sep="")
-    savepath = paste(data_dir , "Matrices\\",sep="")
+	# loadpath = paste(data_dir , "KnowledgeBases\\",sep="")
+    # savepath = paste(data_dir , "Matrices\\",sep="")
 
 	# E2I dict:key s,p,o, cnt
 	# T2I dict:key [s,p,o],serial:how can it be repeated?????
