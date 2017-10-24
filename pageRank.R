@@ -55,7 +55,7 @@
 		print("LOADING DICTIONARIES")
 		load(paste(loadpath , "e2i_" , name , ".RData",sep="")) # set of Entities E2I
 		load(paste(loadpath , "t2i_" , name , ".RData",sep="")) # set of Triples  T2I
-		browser()
+		# browser()
 	print("WRITING RESULTS")
 		tmp = data.frame(Entity=names(E2I),probability=as.vector(distribution[1:length(E2I)]))
 		tmp = rbind(tmp,data.frame(Entity=paste(T2I[,1],T2I[,2],T2I[,3],sep=' '),probability=as.vector(distribution[(length(E2I)+1):n])))

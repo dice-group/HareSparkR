@@ -18,8 +18,8 @@
 #	 t2i|name.RData list of triples and serial
 	
 # saving results
-	if (substring(name,nchar(name)-3)==".xml")  name = substring(name,1,nchar(name)-4)
-	if (substring(name,nchar(name)-2)==".nt")  name = substring(name,1,nchar(name)-3)
+	if (substring(name,nchar(name)-3)==".xml")  {ext =".xml"; name = substring(name,1,nchar(name)-4)}
+	if (substring(name,nchar(name)-2)==".nt")  {ext=".nt"; name = substring(name,1,nchar(name)-3)}
 	# loadpath = paste(data_dir , "KnowledgeBases\\",sep="")
     # savepath = paste(data_dir , "Matrices\\",sep="")
 
@@ -31,7 +31,7 @@
 	storage <- new("Storage", world, "hashes", name="", options="hash-type='memory'")
 	model <- new("Model", world=world, storage, options="")
 	parser <- new("Parser", world)
-	parseFileIntoModel(parser, world, paste(loadpath,name,sep=""), model)
+	parseFileIntoModel(parser, world, paste(loadpath,name,ext,sep=""), model)
 	###
 	queryString <-"select ?s ?p ?o where {?s ?p ?o.}"
 	query <- new("Query", world, queryString, base_uri=NULL, query_language="sparql", query_uri=NULL)
