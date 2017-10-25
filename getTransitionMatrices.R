@@ -7,8 +7,6 @@
 	##Load data
 	if (substring(name,nchar(name)-3)==".xml")  name = substring(name,1,nchar(name)-4)
 	if (substring(name,nchar(name)-2)==".nt")  name = substring(name,1,nchar(name)-3)
-	# loadpath = paste(data_dir , "Matrices\\",sep="")
-	# savepath = paste(data_dir , "Matrices\\",sep="")
 	
 	load(paste(loadpath , "e2i_" , name , ".RData",sep="")) # set of Entities E2I
 	load(paste(loadpath , "t2i_" , name , ".RData",sep="")) # set of Triples  T2I
@@ -19,8 +17,6 @@
 	print(sprintf("Number of triples loaded: %d",nrow(T2I)))
 # browser()
 	#initialize
-	# F = Matrix::Matrix(0, nrow =length(E2I), ncol = nrow(T2I), sparse = TRUE)
-	# W = Matrix::Matrix(0, nrow =nrow(T2I), ncol = length(E2I), sparse = TRUE)
 	F = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(length(E2I), nrow(T2I)))
 	W = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(T2I), length(E2I)))
 	

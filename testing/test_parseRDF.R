@@ -1,20 +1,20 @@
 # test parseRDF
-source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\HareSparkR\\parseRDF.R")
+source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\parseRDF.R")
 # fname='dbpedia_2015-10.xml'
 fname='dailymed_dump.xml'
 # fname='dbpedia100k.xml'
 
 tic=proc.time()
-rdfpath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\Data\\KnowledgeBases\\'
-matpath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\Data\\Matrices\\'
-respath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\Data\\Results\\'
+rdfpath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\Data\\KnowledgeBases\\'
+matpath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\Data\\Matrices\\'
+respath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\Data\\Results\\'
 parseRDF(name=fname,loadpath=rdfpath,savepath=matpath)
 tac=proc.time()
 print(tac-tic)
 #######
 ## test getTransitionMatrices
 tic2=proc.time()
-source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\HareSparkR\\getTransitionMatrices.R")
+source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\getTransitionMatrices.R")
 getTransitionMatrices(fname,loadpath=matpath,savepath=matpath)
 tac2=proc.time()
 print(tac2-tic2)
@@ -22,7 +22,7 @@ print(tac2-tic2)
 ########
 ####test hare
 repetitions=5
-source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\HareSparkR\\hare.R")
+source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\hare.R")
 tic3=proc.time()
 
 
@@ -37,7 +37,7 @@ tac3=proc.time()
 print(tac3-tic3)
 ############## test pagerank ################
 print(".....PAGERANK.....")
-source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSaprkR\\HareSparkR\\pageRank.R")
+source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\pageRank.R")
     tic4=proc.time()
 runtimes_pagerank = NULL
 for ( i in 1:repetitions){

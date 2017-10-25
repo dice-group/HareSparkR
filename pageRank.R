@@ -21,7 +21,7 @@
 	
 	
 	print("CALCULATING P_N")
-	# P = sparse.bmat([[None, W], [F, None]])!!!!!!!!!!!!
+	# P = sparse.bmat([[None, W], [F, None]])
 	blk1 = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(W),ncol(F)))
 	blk2 = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(F),ncol(W)))
 	P=rbind(cbind(blk1,W),cbind(F,blk2))
@@ -46,8 +46,9 @@
 	runtime = tac-tic
 	runtime2 = tac-tic2
 	if(printruntimes){
-		print(c("RUNTIME with load: ", runtime))
-		print(c("RUNTIME without load: ", runtime2))
+		print(sprintf("RUNTIME with load: %.3f", runtime))
+		print(sprintf("RUNTIME without load: %.3f", runtime2))
+		print(sprintf("Number of iterations: %d", ni))
 	}
 	
 	#Save results
