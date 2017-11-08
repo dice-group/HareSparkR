@@ -1,8 +1,11 @@
 # test parseRDF
+# .xml ->parseRDF -[E2I,T2I]->getTrnsMat -[F,W]->hare -[S_N,S_T]->getRankedLists-[RankedLists]
 source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\parseRDF.R")
 # fname='dbpedia_2015-10.xml'
-fname='dailymed_dump.xml'
+# fname='dailymed_dump.xml'
 # fname='dbpedia100k.xml'
+# fname='obama.xml'
+fname='airports.xml'
 
 tic=proc.time()
 rdfpath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\Data\\KnowledgeBases\\'

@@ -7,6 +7,7 @@
 #Saves Triples list and Entities List
 #	List of Entities: E2I dict:key s,p,o, cnt
 #	List of Triples : T2I dict:key t[s,p,o],serial
+#Idea to data structures:T2I contain index of E2I instead of strings!!!!
 
 # This function is inspired by function parseRDF.py in HARE project
  parseRDF <- function(name,loadpath,savepath){
