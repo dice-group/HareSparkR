@@ -1,4 +1,4 @@
-#16/10/2017
+#7/12/2017
 # Calculate W:the transition matrix from triples to entities. 
 	#       and F:the matrix of which the entries are the transition probabilities
 	#             from entities to triples,
@@ -13,25 +13,25 @@
 	
 	# E2I = list(BarackObama=c(1,2), party=c(2,1), Democrates=c(3,1),spouse=c(4,1),MichelleObama=c(5,1))
 	# T2I = data.frame(s=c("BarackObama","BarackObama"),p=c("party","spouse"),o=c("Democrates","MichelleObama"),stringsAsFactors=FALSE)
-	print(sprintf("Number of entities loaded: %d",length(E2I)))
+	print(sprintf("Number of entities loaded: %d",nrow(E2I)))
 	print(sprintf("Number of triples loaded: %d",nrow(T2I)))
 # browser()
 	#initialize
-	F = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(length(E2I), nrow(T2I)))
-	W = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(T2I), length(E2I)))
+	F = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(E2I), nrow(T2I)))
+	W = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(nrow(T2I), nrow(E2I)))
 	
 	print("CALCULATING MATRIX W & F...")
 	
-	for(i in 1:nrow(T2I)){#may be done with lapply
-		for (e in T2I[i,]){		
-			#edge from entity_j to triple_i detected
-			j=E2I[e][[1]][1]
-			W[i, j] = 1.0/3
-			F[j, i] = 1.0/E2I[e][[1]][2]
-		}
+	cname=c('subject','predicate','object')
+	Beta=length(T2I[,1])
+	for(co in 1:3){
+		print(cname[co])
+		j=match(T2I[,co],row.names(E2I))
+		W[cbind(1:Beta,j)]=1.0/3
+		F[cbind(j,1:Beta)]=1.0/E2I[j,2]
 	}
-	
 ####################################
+	print('Saving files...')
 	save(file=paste(savepath , "W_" , name ,".RData",sep=""),W)
 	save(file=paste(savepath , "F_" , name ,".RData",sep=""),F)
 

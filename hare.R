@@ -15,8 +15,7 @@
 	print(sprintf('Dim of F: %d,%d',nrow(F),ncol(F)))
 	print(sprintf('Dim of W: %d,%d',nrow(W),ncol(W)))
 	
-	# browser()
-	print("CALCULATING P(N)")
+	print("CALCULATING P(N)")#Eqn:(4)
 	P = F %*% W #sparse.csr_matrix(F.dot(W))
 	n = nrow(P)
 
@@ -38,11 +37,11 @@
 	resourcedistribution = previous  #S(N)
 	tripledistribution = Matrix::t(F) %*% previous #Equation 6, S(T)
 	#Scale with equation 8 to get a distribution [8.11.17]
-	#Beta/(Alpha*(Alpha+Beta))
-	Beta = nrow(tripledistribution)
+	
 	Alpha = n
-	scaleS_T = Beta/(Alpha*(Alpha+Beta))
-	scaleS_N = 1-scaleS_T
+	Beta = nrow(tripledistribution)
+	scaleS_N = Beta/(Alpha+Beta)
+	scaleS_T = 1-scaleS_N
 	resourcedistribution = resourcedistribution * scaleS_T
 	tripledistribution = tripledistribution * scaleS_N
 	

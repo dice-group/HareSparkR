@@ -37,26 +37,46 @@
 	queryString <-"select ?s ?p ?o where {?s ?p ?o.}"
 	query <- new("Query", world, queryString, base_uri=NULL, query_language="sparql", query_uri=NULL)
 	queryResult <- executeQuery(query, model)
+	
 	sn=1 #serial for entities
 	j=1 #serial for  triples
 	E2I=list()
 	T2I=NULL
+	Tall=NULL
+	nerr = 0
 	while(!is.null(result <- getNextResult(queryResult))){
-		for(k in result){
-			tmp = E2I[[k]]
-			if(is.null(tmp)){
-				E2I[[k]]=c(sn,1)
-				sn = sn + 1
-			}else{ 
-				E2I[[k]][2] = tmp[2] + 1
-			}
+		if(is.na(result$o)) {
+			nerr = nerr + 1;
+			next;
 		}
+		# for(k in result){
+			# tmp = E2I[[k]]
+			# if(is.null(tmp)){
+				# E2I[[k]]=c(sn,1)
+				# sn = sn + 1
+			# }else{ 
+				# E2I[[k]][2] = tmp[2] + 1
+			# }
+		# }
 		##Triples (assume no repeats)
 		T2I=rbind(T2I,result)
+		# browser()		# T2I[j,1:3] = result
 		j = j + 1
 		if(j%%100==0) print(sprintf("Triple: %d",j))
+		if(j%%1000==0) {
+				Tall=rbind(Tall,T2I)
+				T2I=NULL
+				}
+			
 	}
-	
+		Tall=rbind(Tall,T2I)
+	T2I=Tall
+	print("Calculating counts...")
+	# browser()
+	Ent=table(unlist(c(T2I[,1],T2I[,2],T2I[,3])))
+	E2I=cbind(sn=1:length(Ent),cnt=Ent)
+
+	print(sprintf("# Triples: %d, #unique entities: %d, # escaped triples: %d",j-1,nrow(E2I),nerr))
 	save(file=paste(savepath , "e2i_" , name , ".RData",sep=""),E2I)
 	save(file=paste(savepath , "t2i_" , name , ".RData",sep=""),T2I)
 }
