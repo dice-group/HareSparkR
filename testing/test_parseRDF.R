@@ -10,11 +10,12 @@ respath='C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\Data\\Results\\'
 # fname='obama.xml'
 # fname='sec.xml'
 # fname='lubm20fix.xml'
-fname='lubm200fix.xml'
+# fname='lubm500fix.xml'
+# fname='dbpedia.xml'
 # fname='lubm50fix.xml'
 # fname='uspto.xml'
 # fname='airports.xml'
-# fname='sider.xml'
+fname='sider.xml'
 # fname='dogfood.xml'
 
 rdfpath='D:\\RDF\\'
@@ -33,7 +34,7 @@ print(tac2-tic2)
 
 ########
 ####test hare
-repetitions=5
+repetitions=3
 tic3=proc.time()
 
 print(".....HARE.....")

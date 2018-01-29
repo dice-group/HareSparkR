@@ -16,10 +16,11 @@
 	print(sprintf('Dim of W: %d,%d',nrow(W),ncol(W)))
 	
 	print("CALCULATING P(N)")#Eqn:(4)
-	P = F %*% W #sparse.csr_matrix(F.dot(W))
-	n = nrow(P)
+	d_P_T = damping*Matrix::t(F %*% W) #sparse.csr_matrix(F.dot(W))
+	n = nrow(d_P_T)
 
 	previous = ones = rep(1,n)/n
+	d_ones = (1-damping)*ones
 	error = 1
 	 #Equation 9
 	tic2 = proc.time()
@@ -27,8 +28,10 @@
 	while (error > epsilon && ni < maxIterations){
 		ni = ni + 1
 		tmp = previous
-		previous = damping*Matrix::t(P)%*%(previous) + (1-damping)*ones
+		previous = d_P_T%*%(previous) + d_ones
 		error = norm(as.matrix(tmp - previous),"f")
+		
+		print(sprintf("ni:%d,max index:%d,max:%f,sumSn:%f",ni,which.max(as.vector(previous)),max(previous),sum(previous)));
 		if(printerror)
 			print(error)
 	}
@@ -61,10 +64,12 @@
 		load(paste(loadpath , "t2i_" , name , ".RData",sep="")) # set of Triples  T2I
 		
 	print("WRITING RESULTS")### to be sorted in decreasing order
-		tmp=data.frame(Entity=names(E2I),Probability=as.vector(resourcedistribution))[order(resourcedistribution,decreasing=TRUE),]		
+		# tmp=data.frame(Entity=names(E2I),Probability=as.vector(resourcedistribution))[order(resourcedistribution,decreasing=TRUE),]	#E2I:List	
+		tmp=data.frame(Entity=row.names(E2I),Probability=as.vector(resourcedistribution))[order(resourcedistribution,decreasing=TRUE),]		
 		write.csv(file=paste(savepath , "results_resources_" , name , "_HARE.txt",sep=''),tmp,row.names=FALSE)
 		tmp=data.frame(Triple=paste(T2I[,1],T2I[,2],T2I[,3],sep=' '),Probability=as.vector(tripledistribution))[order(tripledistribution,decreasing=TRUE),]
 		write.csv(file=paste(savepath , "results_triples_" , name , "_HARE.txt",sep=''),tmp,row.names=FALSE)
 	}
+	browser()
 	return (runtime2[3])
 }
