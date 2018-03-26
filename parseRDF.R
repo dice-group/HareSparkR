@@ -43,6 +43,10 @@
 	E2I=list()
 	T2I=NULL
 	Tall=NULL
+	sv=list()
+	pv=list()
+	ov=list()
+
 	nerr = 0
 	while(!is.null(result <- getNextResult(queryResult))){
 		if(is.na(result$o)) {
@@ -59,18 +63,18 @@
 			# }
 		# }
 		##Triples (assume no repeats)
-		T2I=rbind(T2I,result)
+		# T2I=rbind(T2I,result)
+		sv[[j]]=result$s
+		pv[[j]]=result$p
+		ov[[j]]=result$o
+
 		# browser()		# T2I[j,1:3] = result
 		j = j + 1
 		if(j%%1000==0) print(sprintf("Triple: %d",j))
-		if(j%%10000==0) {
-				Tall=rbind(Tall,T2I)
-				T2I=NULL
-				}
 			
 	}
-		Tall=rbind(Tall,T2I)
-	T2I=Tall
+	# Tall=rbind(Tall,T2I)
+	T2I=cbind(S=unlist(sv),P=unlist(pv),O=unlist(ov))
 	print("Calculating counts...")
 	# browser()
 	Ent=table(unlist(c(T2I[,1],T2I[,2],T2I[,3])))
@@ -82,3 +86,6 @@
 }
 
 #Packages: SPARQL,egonw (jena),redland,feedeR (parse.rdf)
+## bottleneck rbind function lists instead
+
+		

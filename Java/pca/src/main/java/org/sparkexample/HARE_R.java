@@ -1,10 +1,12 @@
-
+// HelloSpark is the right version
 /* Demonstrate matrix operations:
 multiply
 multiply by scalar
 add
 transpose
 */
+// ##2/2/2018 Calculating error is the bottleneck: test every second time this saves about one third
+// broadcast function
 package org.sparkexample;
 
 //$example on$
@@ -190,8 +192,8 @@ public static double[] PageRankLoop_CM(JavaSparkContext jsc,String fname, int nr
 		error= Math.sqrt(sum);
 		long t_iter3 = System.currentTimeMillis();
 		writer.println("ni:"+ ni +" vsum:" + v_sum + " error:" + error +" max_ind:" + max_ind + " max:" + max
-				 + " t mul:" +  (t_mmul - t_iter1)/1000  + " tsum:" +  (t_msum - t_mmul)/1000  + 
-				 " t collect:" +  (t_mc - t_msum)/1000  );
+				 + " tmul:" +  (t_mmul - t_iter1)/1000  + " tsum:" +  (t_msum - t_mmul)/1000  + 
+				 " tcollect:" +  (t_mc - t_msum)/1000  );
 //		 t_init=t_iter3;
 	}
 	long tac=System.currentTimeMillis();

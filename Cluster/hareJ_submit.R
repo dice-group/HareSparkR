@@ -1,11 +1,14 @@
 
 hadpath='/user/hadoop/abd/'
-matpath='/home/hadoop/abd/mat/'
+matpath=paste(getwd(),'/',sep='')#'/home/hadoop/abd/mat/'
 respath='/home/hadoop/abd/res/'
 damping = 0.85
 # airports sider dogfood lubm50fix dbpedia 
-name='dbpedia'
-print(load(paste(matpath , "F_",name,".RData",sep='')))
+# name='uspto'
+
+for(name in c('airports', 'sider', 'dogfood' ,'sec','lubm50fix','lubm20fix','lubm100fix','lubm200fix')){
+  print(name)
+  print(load(paste(matpath , "F_",name,".RData",sep='')))
 	print(load(paste(matpath , "W_",name,".RData",sep='')))
 	dim(F)
 	dim(W)
@@ -24,8 +27,9 @@ params=c(paste("nr=",nrow(P),sep=''),
 con <- file(paste(matpath, name,"_HARE.par",sep=''), "w", blocking = FALSE)
 writeLines(params,con)
 close(con)
+}
 ### Java
- d_P_T= damping* t(P)
+ d_P_T= damping* Matrix::t(P)
  
 TMPmat <- as(d_P_T, "TsparseMatrix")
 	# TMPmat <- d_P_T
@@ -66,9 +70,9 @@ system2("hadoop",paste("fs -put",paste(matpath , "P_",name,"_HARE.csv",sep=''),h
 ##########################################################################################################
 	  # ============================ Compare to R =================
 	
-	 source("C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HareSparkR\\HareSparkR\\hare.R")
-	fname="airports.xml"
-	 
-	 runtime = hare(fname,loadpath=matpath,savepath=respath, epsilon=10^-3, damping = .85, saveresults=TRUE, printerror=FALSE, printruntimes=TRUE)
-fname=	 paste(matpath , "P_",name,".csv",sep='')
-	 trp=read.table(fname,sep=',',quote = "",stringsAsFactors =FALSE,fill=TRUE,comment.char = "",na.strings ="",row.names=NULL)
+hadpath='/user/hadoop/abd/'
+name='uspto'
+for(name in c('airports', 'sider', 'dogfood' ,'sec','lubm50fix','lubm20fix','lubm100fix','lubm200fix')){
+print(name)
+   system2("hadoop",paste("fs -mv",paste(hadpath , "P_",name,".csv",sep=''),paste(hadpath , "P_",name,"_HARE.csv",sep=''),sep=' '))
+}

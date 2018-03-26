@@ -1,5 +1,31 @@
 ##########################################################################
 fname="C:\\Users\\Abdelmonem\\Dropbox\\HARE\\HARE-master\\Data\\KnowledgeBases\\dbpedia_2015-10.nt"
+# Geiser
+
+	name="lubm5k"
+	savepath="/home/AbdelmonemAamer/shared/mats/"
+	fname=paste("/home/AbdelmonemAamer/shared/kg/",name,'.nt',sep='')
+	tic=proc.time()
+	trp=read.table(fname,sep=' ',quote = "\"",stringsAsFactors =FALSE,fill=TRUE,comment.char = "",na.strings ="",row.names=NULL)
+	dim(trp)
+	sum(is.na(unlist(trp[,4])))##test wrong
+	print(object.size(trp))
+	T2I=trp[,1:3]
+	rm(trp) # for memory usage
+	flg=duplicated(paste(T2I[,1],T2I[,2],T2I[,3],sep=''))
+	T2I=T2I[!flg,]
+	dim(T2I)
+	save(file=paste(savepath , "t2i_" , name , ".RData",sep=""),T2I)
+	tic1=proc.time()
+		Ent=table(unlist(c(T2I[,1],T2I[,2],T2I[,3])))
+		E2I=cbind(sn=1:length(Ent),cnt=Ent)
+	# savepath='/data/home/AbdelmonemAamer/datasets/datasets/mat/mats/'
+	tic2=proc.time()
+	save(file=paste(savepath , "e2i_" , name , ".RData",sep=""),E2I)
+	tac=proc.time()
+	print(tac-tic1)
+	print(tac-tic)
+
 
 # fname="D:\\rdf\\lubm20fix.nt"
 savepath='/home/hadoop/abd/mat/'
@@ -7,8 +33,9 @@ name='lubm5k'
 # fname=paste('/data/home/AbdelmonemAamer/datasets/datasets/',name,'.nt',sep='')
 fname=paste('/home/hadoop/abd/kg/',name,'.nt',sep='')
 tic=proc.time()
-trp=read.table(fname,sep=' ',quote = "",stringsAsFactors =FALSE,fill=TRUE,comment.char = "",na.strings ="",row.names=NULL)
+trp=read.table(fname,sep=' ',quote = "\"",stringsAsFactors =FALSE,fill=TRUE,comment.char = "",na.strings ="",row.names=NULL)
 dim(trp)
+sum(is.na(unlist(trp[,4])))
 print(object.size(trp))
 T2I=trp[,1:3]
 rm(trp) # for memory usage
@@ -221,3 +248,35 @@ return(data.frame(s=s,p=p,o=o,stringsAsFactors=F))
 ln='<http://datasets.freme-project.eu/airports/id/1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .'
 
 parseTriple(ln)
+
+####### getTriples
+getTriplesNT<-function(fname){
+	Chunk_size=5000
+	Tall=NULL
+	trp=NULL
+	con <- file(fname, "r", blocking = FALSE)#108 seconds
+	nt = 0
+	# sn = 1
+	while(1==1){
+		lnk=readLines(con, n=Chunk_size) # get one Chunk
+		if(length(lnk)==0) break;
+		for (li in 1:length(lnk)){
+			ln = lnk[li]
+			# which(strsplit(ln, "")[[1]]=="2")
+			st=strsplit(ln, " ")
+			s=st[[1]][1]
+			p=st[[1]][2]
+			o=substring(ln,nchar(s)+nchar(p)+3,nchar(ln)-2)# leave one space after >
+				##Triples (assume no repeats)
+				trp=rbind(trp,cbind(s,p,o))
+			nt = nt + 1
+			if(nt %% 1000 ==0)print(sprintf("Triple: %d",nt))
+			if(nt%%10000==0) {
+					Tall=rbind(Tall,trp)
+					trp=NULL
+					}
+		}
+	}
+		Tall=rbind(Tall,trp)
+	return(Tall)	
+}

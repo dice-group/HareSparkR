@@ -37,3 +37,7 @@
 
 }
 
+# To Do: pred_index=, subj_index=, obj_index=,lit_index=,
+# prd=unique(T2I[,2])
+# pred_index=match(prd,E2I)
+# j=pred_index[T2I[,2]]

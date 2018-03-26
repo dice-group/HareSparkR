@@ -3,7 +3,9 @@ hadpath='/user/hadoop/abd/'
 matpath='/home/hadoop/abd/mat/'
 respath='/home/hadoop/abd/res/'
 # airports sider dogfood lubm50fix dbpedia 
-name='sider'
+# name='sider'
+# for(name in c('airports', 'sider', 'dogfood' ,'sec','lubm50fix','lubm20fix','lubm100fix','lubm200fix')){
+for(name in c('uspto', 'dbpedia', 'lubm500fix','lubm1000fix')){
 print(load(paste(matpath , "F_",name,".RData",sep='')))
 	print(load(paste(matpath , "W_",name,".RData",sep='')))
 	dim(F)
@@ -44,7 +46,7 @@ params=c(paste("nr=",nrow(P),sep=''),
 con <- file(paste(matpath, name,"_PageRank.par",sep=''), "w", blocking = FALSE)
 writeLines(params,con)
 close(con)
-
+}
 ## process results
 	
 	S_n = read.table(paste("Sn_",name,"_PageRank.csv",sep=''));
@@ -56,5 +58,5 @@ close(con)
 
 	 #tmp = data.frame(Entity=names(E2I),probability=as.vector(distribution[1:length(E2I)]))
 	  tmp = data.frame(Entity=row.names(E2I),probability=as.vector(distribution[1:nrow(E2I),1]))
-     tmp = rbind(tmp,data.frame(Entity=paste(T2I[,1],T2I[,2],T2I[,3],sep=' '),probability=as.vector(distribution[(length(E2I)+1):n])))
+     tmp = rbind(tmp,data.frame(Entity=paste(T2I[,1],T2I[,2],T2I[,3],sep=' '),probability=as.vector(distribution[(nrow(E2I)+1):nrow(distribution),1])))[order(distribution[,1],decreasing=TRUE),]
 	 write.csv(file=paste(respath , "results_resources_" , name , "_PAGERANK.txt",sep=''),tmp,row.names=FALSE)

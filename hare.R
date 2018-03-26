@@ -70,6 +70,6 @@
 		tmp=data.frame(Triple=paste(T2I[,1],T2I[,2],T2I[,3],sep=' '),Probability=as.vector(tripledistribution))[order(tripledistribution,decreasing=TRUE),]
 		write.csv(file=paste(savepath , "results_triples_" , name , "_HARE.txt",sep=''),tmp,row.names=FALSE)
 	}
-	browser()
+	# browser()
 	return (runtime2[3])
 }
