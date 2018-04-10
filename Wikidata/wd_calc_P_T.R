@@ -2,10 +2,7 @@
 # Computes S(N) given P=FW in chunks
     # calc_d_P_T 
 	name="wd022018"
-	# name="sec"
-	# savepath="D:\\RDF\\mats\\"
 	savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
-	# loadpath="D:\\RDF\\parseNT\\"
 	loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
 
     Alpha <- 479414243
@@ -66,56 +63,3 @@
 	}
 
 print("Ok.")
-
-# Alpha=5
-# A=matrix(1:(Alpha*Alpha),nrow=5)
-# tch_sz = c(2,3)
-# Pch_all <- list()
-# PTch_all <- list()
-# Pch_all[[1]]=A[1:2,]
-# Pch_all[[2]]=A[3:5,]
-# for(t_ch in 1:2){
-	# PTch = Matrix::sparseMatrix(i=1,j=1,x=0,dims=c(tch_sz[t_ch], Alpha))
-	# col_st=1
-	# for(ch in 1:2){
-		# print(sprintf("t_ch:%d, ch:%d",t_ch,ch))
-		# index_st  = ifelse(t_ch==1,1,1+sum(tch_sz[1:(t_ch-1)]))
-		# index_end = sum(tch_sz[1:t_ch])
-		# tmp=Matrix::t(Pch_all[[ch]])#[,index_st:index_end])
-
-		# tmp=tmp[index_st:index_end,]
-			# ts1=proc.time()
-			# print(sprintf("t tmp:%.2f,nnz:%d",(ts1-tt)[3],length(tmp@x) ))
-			# print(str(tmp))
-			# col_end= col_st + nrow(Pch_all[[ch]])-1
-			# print(sprintf("col_st:%d, col_end:%d",col_st,col_end))
-			# tmp=methods::as(tmp,'TsparseMatrix')
-			# print(str(tmp))
-			# tts=proc.time()
-			# print(sprintf("t Tsp:%.2f ",(tts-ts1)[3]))
-
-			# newj=tmp@j+col_st
-			# tnewj=proc.time()
-			# print(sprintf("t newj:%.2f ",(tnewj-tts)[3]))
-
-			# tmp=Matrix::sparseMatrix(i=tmp@i+1,j=newj,x=tmp@x,dims=c(tch_sz[t_ch], Alpha))
-#			# PTch[,col_st:col_end] = tmp
-			# tnj=proc.time()
-			# print(sprintf("t newj:%.2f, Adding...",(tnj-tnewj)[3]))
-			
-			# PTch = PTch + tmp
-			# t4 = proc.time()
-
-		# tmp=Matrix::t(Pch_all[[ch]][,index_st:index_end])
-		# col_end= col_st +nrow(Pch_all[[ch]])-1
-		# print(sprintf("col_st:%d, col_end:%d",col_st,col_end))
-		# print(tmp)
-		# #PTch[index_st:index_end,col_st:col_end] = tmp		
-		# PTch[,col_st:col_end] = tmp		
-		# col_st=col_end+1
-	# }
-	# PTch_all[[t_ch]]=PTch
-	# if(t_ch==1){ PT=PTch;
-	# }else{ PT=rbind(PT,PTch)}
-# }
-

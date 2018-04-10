@@ -1,11 +1,8 @@
 # 18/3/2018
 
-# name="wd022018"
-name="sec"
-savepath="D:\\RDF\\mats\\"
-# savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
-loadpath="D:\\RDF\\parseNT\\"
-# loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
+name="wd022018"
+savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
+loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
 
 #print(load(paste0(savepath,"P_",name,"_",20,".RData")))
 print("Adding blocks of FW40...")

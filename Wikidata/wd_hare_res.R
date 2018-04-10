@@ -26,3 +26,15 @@ hd_sz=10000
 	print(paste0("cbind...",format(Sys.time(), "%a %b %d %X %Y")))
 	tmp=cbind(Entity=Ent,count=E_cnt,Probability=as.vector(previous))[Sn_order,]		
 	write.csv(file=paste(savepath , "results_resources_" , name , "_HARE.txt",sep=''),tmp,row.names=FALSE)
+
+	
+	#############
+	x=read.csv("D:\\RDF\\res\\results_resources_wd022018_HARE_hd.csv",header=T)
+	plot(log(x[1:100,2]),x[1:100,3],main=sprintf("Top 100 entity Wikidata, count vs Probability\n correlation : %.1f %%",100*cor(log(x[1:100,2]),x[1:100,3])))
+
+	aa=c(10,15,20,50,100,150,250,500,750,1000,2000)
+	ac=NULL
+	for(i in aa)ac=c(ac,cor(log(x[1:i,2]),x[1:i,3]));
+	plot(aa,ac,type='b',col='red',lwd=2,main="Correlation between log(counts) and probability",xlab="Number of entities",ylab="Pearson corr.")
+
+	#####

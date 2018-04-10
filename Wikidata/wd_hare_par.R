@@ -99,30 +99,3 @@
 	write.csv(file=paste(savepath , "results_resources_" , name , "_HARE_hd.csv",sep=''),tmp[1:10000,],row.names=FALSE)
 	write.csv(file=paste(savepath , "results_resources_" , name , "_HARE.txt",sep=''),tmp,row.names=FALSE)
 
-	
- # wd_hare <- function(name,loadpath,savepath, epsilon=1e-3, damping, maxIterations=1000,saveresults=TRUE, printerror=FALSE, printruntimes=FALSE){
-# hare_ch(PTch,prv,ch,index_st,index_end){
-	# read file 
-	# calc new prv
-	# return results
-
-
-	# resourcedistribution = previous  #S(N)
-	# tripledistribution = Matrix::t(F) %*% previous #Equation 6, S(T)
-	##Scale with equation 8 to get a distribution [8.11.17]
-	
-	# Alpha = n
-	# Beta = nrow(tripledistribution)
-	# scaleS_N = Beta/(Alpha+Beta)
-	# scaleS_T = 1-scaleS_N
-	# resourcedistribution = resourcedistribution * scaleS_T
-	# tripledistribution = tripledistribution * scaleS_N
-	
-	# tac = proc.time()
-	# runtime = tac-tic
-	# runtime2 = tac-tic2
-	# if(printruntimes){
-		# print(sprintf("RUNTIME with load: %.3f", runtime[3]))
-		# print(sprintf("RUNTIME without load: %.3f", runtime2[3]))
-		# print(sprintf("Number of iterations: %d", ni))
-	# }

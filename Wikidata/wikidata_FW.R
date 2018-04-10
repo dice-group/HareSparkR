@@ -1,10 +1,7 @@
 # 14/3/2018
 name="wd022018"
-# name="sec"
-# savepath="D:\\RDF\\mats\\"
 savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
-# loadpath="D:\\RDF\\parseNT\\"
-loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
+oadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
 t1=proc.time()
 	# con <- file(paste(loadpath,name,"_E_cnt.txt",sep=''), "r", blocking = FALSE)
 	# E_cnt=as.integer(readLines(con))

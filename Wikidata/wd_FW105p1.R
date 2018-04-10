@@ -1,13 +1,9 @@
 # 18/3/2018
 
-# name="wd022018"
-name="sec"
-savepath="D:\\RDF\\mats\\"
-# savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
-loadpath="D:\\RDF\\parseNT\\"
-# loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
-# P1_fn=c("P1_wd022018_30_40","P1_wd022018_70_80","P1_wd022018_90_105")#size 100,000,000
-P1_fn=c("P1_sec_30_40","P1_wd022018_70_80","P1_wd022018_90_105")#size 100,000,000
+name="wd022018"
+savepath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
+loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
+P1_fn=c("P1_wd022018_30_40","P1_wd022018_70_80","P1_wd022018_90_105")#size 100,000,000
 
 #print(load(paste0(savepath,"P_",name,"_",20,".RData")))
 print("Adding blocks of FW105P1...")
