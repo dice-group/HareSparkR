@@ -8,8 +8,8 @@ P1_fn=c("P1_wd022018_30_40","P1_wd022018_70_80","P1_wd022018_90_105")#size 100,0
 #print(load(paste0(savepath,"P_",name,"_",20,".RData")))
 print("Adding blocks of FW105P1...")
 library(Matrix)
-p1_sz=100000#10000000#c(10000000,rep(20000000,3),30000000)#c(50000000,50000000)  #Work around the limit of max nnz(2^31)
-P1_sz=10000000#100000000
+p1_sz=10000000#c(10000000,rep(20000000,3),30000000)#c(50000000,50000000)  #Work around the limit of max nnz(2^31)
+P1_sz=100000000
 #P2_fn=c("P2_wd022018_30_40","P2_wd022018_70_80","P2_wd022018_90_105")#size 379,414,243
 #P1
 for(ch in 1:ceiling(P1_sz/p1_sz)){#P1_wd022018_xx_xx

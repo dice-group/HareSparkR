@@ -7,8 +7,7 @@ loadpath="/upb/departments/pc2/scratch/desouki/ParseNT/wd/"
 #print(load(paste0(savepath,"P_",name,"_",20,".RData")))
 print("Adding blocks of FW40...")
 library(Matrix)
-# p1_sz=100000000  #Work around the limit of max nnz(2^31)
-p1_sz=200000  #Work around the limit of max nnz(2^31)
+p1_sz=100000000  #Work around the limit of max nnz(2^31)
 for(ch in seq(40,80,40)){
 	t1=proc.time()
 	print(ch)
